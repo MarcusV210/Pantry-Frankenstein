@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: pantry_db 
+    environment:
+      POSTGRES_USER: pantry
+      POSTGRES_DB: pantry_frankenstein
+      POSTGRES_PASSWORD: pantry123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pantry_pdadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pantry.com 
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata: # Will automatically pick up from the volumes part in postgres
