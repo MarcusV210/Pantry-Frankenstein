@@ -4,10 +4,10 @@ services:
     container_name: pantry_db 
     environment:
       POSTGRES_USER: pantry
-      POSTGRES_DB: pantry_frankenstein
       POSTGRES_PASSWORD: pantry123
+      POSTGRES_DB: pantry_frankenstein
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
   
