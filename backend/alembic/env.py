@@ -10,6 +10,10 @@ from sqlalchemy import pool
 from alembic import context
 
 from app.database import Base
+from app.models.ingredients import IngredientModel
+from app.models.users import UserModel
+from app.models.pantry import PantryModel
+from app.models.recipes import RecipeModel
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 load_dotenv(find_dotenv(), override=True)

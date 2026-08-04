@@ -3,7 +3,7 @@ from sqlalchemy import String, Float, ForeignKey, Date
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database import Base 
 
-class Pantry(Base):
+class PantryModel(Base):
     __tablename__ = 'pantry'
 
     id : Mapped[int] = mapped_column(primary_key = True)
