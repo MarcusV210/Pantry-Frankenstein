@@ -1,10 +1,13 @@
-# pyrefly: ignore [missing-import]
 from fastapi import FastAPI
+from app.api.auth import router as auth_router
 from app.database import SessionLocal
 from sqlalchemy import text
 import os 
 
 app = FastAPI(title="Backend something")
+app.include_router(auth_router, prefix="/auth")
+
+
 
 @app.get("/health")
 def get_health():

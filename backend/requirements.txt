@@ -7,3 +7,5 @@ pydantic
 python-dotenv 
 google-generativeai 
 pint
+python-jose[cryptography] 
+passlib[bcrypt]
