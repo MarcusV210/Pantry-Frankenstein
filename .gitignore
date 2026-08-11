@@ -30,6 +30,9 @@ wheels/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+htmlcov/
+
 
 # Node / Frontend (for future frontend dependencies & builds)
 node_modules/
