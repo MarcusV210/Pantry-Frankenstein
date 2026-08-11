@@ -43,3 +43,12 @@ def test_different_density():
     )
 
     assert result == pytest.approx(59.3)
+
+def test_no_density():
+    result = normalise(
+        quantity=3,
+        unit=None, 
+        density=0.2
+    )
+
+    assert result == pytest.approx(3)
