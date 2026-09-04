@@ -1,6 +1,6 @@
 from datetime import date
 from sqlalchemy import String, Float, ForeignKey, Date
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base 
 
 class PantryModel(Base):
@@ -13,3 +13,5 @@ class PantryModel(Base):
     unit_raw : Mapped[str] = mapped_column(String(255), nullable = False)
     quantity_normalised : Mapped[float] = mapped_column(Float, nullable = False)
     expiration_date : Mapped[date | None] = mapped_column(Date, nullable = True) # Expiry can be null if not found potentially.
+    ingredient = relationship("IngredientModel") # Connect it to read from the IngredientModel table
+    
