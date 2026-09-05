@@ -9,7 +9,7 @@ from app.schemas.pantry import PantryItemOut, PantryItemCreate, PantryItemUpdate
 from app.core.unit_engine import normalise
 from app.core.security import get_current_user
 from app.models.users import UserModel
-from datetime import date
+from datetime import date, timedelta
 from typing import List
 
 router = APIRouter() 
@@ -45,6 +45,27 @@ def add_pantry_item(body: PantryItemCreate, db: Session = Depends(get_db), curre
         "expiration_date" : item.expiration_date, 
         "days_until_expiry" : (item.expiration_date - date.today()).days # Diff between current date and expiration date in integers
     } # Matched PantryItemOut
+
+@router.get("/expiring", response_model = List[PantryItemOut])
+def get_expiry_item(days : int = 3, db : Session = Depends(get_db), current_user : UserModel = Depends(get_current_user)):
+    limit = date.today() + timedelta(days=days)
+
+    items = db.query(PantryModel).filter(PantryModel.user_id == current_user.id, PantryModel.expiration_date <= limit).all()
+
+    return [
+        { 
+        "id" : item.id, 
+        "name" : item.ingredient.name, 
+        "quantity_raw" : item.quantity_raw, 
+        "unit_raw" : item.unit_raw, 
+        "quantity_normalised" : item.quantity_normalised, 
+        "expiration_date" : item.expiration_date, 
+        "days_until_expiry" : (item.expiration_date - date.today()).days # Diff between current date and expiration date in integers
+        }
+        for item in items
+    ]
+
+
 
 
 @router.get("/", response_model = List[PantryItemOut])
@@ -102,3 +123,4 @@ def update_pantry_item(item_id : int, body: PantryItemUpdate, db: Session = Depe
         "expiration_date" : item.expiration_date, 
         "days_until_expiry" : (item.expiration_date - date.today()).days # Diff between current date and expiration date in integers
     }
+
