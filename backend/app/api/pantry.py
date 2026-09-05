@@ -62,4 +62,14 @@ def get_pantry(db: Session = Depends(get_db), current_user: UserModel = Depends(
         for item in items
     ]
 
+@router.delete("/items/{item_id}")
+def delete_pantry_item(item_id : int, db: Session = Depends(get_db), current_user : UserModel = Depends(get_current_user)):
+    item_to_delete = db.query(PantryModel).filter(PantryModel.user_id == current_user.id, PantryModel.id == item_id).first()
 
+    if not item_to_delete:
+        raise HTTPException(status_code = 400, detail = "Item not found")
+    
+    db.delete(item_to_delete)
+    db.commit()
+
+    return {"message": "Item deleted."}
