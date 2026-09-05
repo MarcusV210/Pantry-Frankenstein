@@ -19,7 +19,7 @@ def add_pantry_item(body: PantryItemCreate, db: Session = Depends(get_db), curre
     ingredient = db.query(IngredientModel).filter(IngredientModel.name == body.name.lower()).first()
 
     if not ingredient:
-        raise HTTPException(status_code = 400, detail = f"Ingredient : {body.name} not found." )
+        raise HTTPException(status_code = 404, detail = f"Ingredient : {body.name} not found." )
 
     quantity_normalised = normalise(quantity=body.quantity_raw, unit=body.unit_raw, density=ingredient.density_g_per_ml)
 
@@ -90,7 +90,7 @@ def delete_pantry_item(item_id : int, db: Session = Depends(get_db), current_use
     item_to_delete = db.query(PantryModel).filter(PantryModel.user_id == current_user.id, PantryModel.id == item_id).first()
 
     if not item_to_delete:
-        raise HTTPException(status_code = 400, detail = "Item not found")
+        raise HTTPException(status_code = 404, detail = "Item not found")
     
     db.delete(item_to_delete)
     db.commit()
@@ -98,12 +98,12 @@ def delete_pantry_item(item_id : int, db: Session = Depends(get_db), current_use
     return {"message": "Item deleted."}
 
 
-@router.patch("pantry/items/{item_id}", response_model = PantryItemOut)
+@router.patch("/items/{item_id}", response_model = PantryItemOut)
 def update_pantry_item(item_id : int, body: PantryItemUpdate, db: Session = Depends(get_db), current_user : UserModel = Depends(get_current_user)):
     item = db.query(PantryModel).filter(PantryModel.user_id == current_user.id, PantryModel.id == item_id).first() 
 
     if not item:
-        raise HTTPException(status_code = 400, detail = "Item not found.")
+        raise HTTPException(status_code = 404, detail = "Item not found.")
 
     quantity_normalised = normalise(body.quantity_raw, body.unit_raw, item.ingredient.density_g_per_ml)
 
