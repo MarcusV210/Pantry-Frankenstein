@@ -8,6 +8,7 @@ from app.core.unit_engine import normalise
 from app.core.security import get_current_user
 from app.models.users import UserModel
 from datetime import date
+from typing import List
 
 router = APIRouter() 
 
@@ -40,5 +41,25 @@ def add_pantry_item(body: PantryItemCreate, db: Session = Depends(get_db), curre
         "unit_raw" : item.unit_raw, 
         "quantity_normalised" : item.quantity_normalised, 
         "expiration_date" : item.expiration_date, 
-        "days_until_expiry" : (item.expiration_date - date.today()).days() # Diff between current date and expiration date in integers
+        "days_until_expiry" : (item.expiration_date - date.today()).days # Diff between current date and expiration date in integers
     } # Matched PantryItemOut
+
+
+@router.get("/", response_model = List[PantryItemOut])
+def get_pantry(db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_user)):
+    items = db.query(PantryModel).filter(PantryModel.user_id == current_user.id).all()
+
+    return [
+        { 
+        "id" : item.id, 
+        "name" : item.ingredient.name, 
+        "quantity_raw" : item.quantity_raw, 
+        "unit_raw" : item.unit_raw, 
+        "quantity_normalised" : item.quantity_normalised, 
+        "expiration_date" : item.expiration_date, 
+        "days_until_expiry" : (item.expiration_date - date.today()).days # Diff between current date and expiration date in integers
+        }
+        for item in items
+    ]
+
+
