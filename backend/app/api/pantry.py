@@ -1,9 +1,11 @@
+from pint.facets.numpy import quantity
+from fastapi import responses
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.ingredients import IngredientModel
 from app.models.pantry import PantryModel
-from app.schemas.pantry import PantryItemOut, PantryItemCreate
+from app.schemas.pantry import PantryItemOut, PantryItemCreate, PantryItemUpdate
 from app.core.unit_engine import normalise
 from app.core.security import get_current_user
 from app.models.users import UserModel
@@ -73,3 +75,30 @@ def delete_pantry_item(item_id : int, db: Session = Depends(get_db), current_use
     db.commit()
 
     return {"message": "Item deleted."}
+
+
+@router.patch("pantry/items/{item_id}", response_model = PantryItemOut)
+def update_pantry_item(item_id : int, body: PantryItemUpdate, db: Session = Depends(get_db), current_user : UserModel = Depends(get_current_user)):
+    item = db.query(PantryModel).filter(PantryModel.user_id == current_user.id, PantryModel.id == item_id).first() 
+
+    if not item:
+        raise HTTPException(status_code = 400, detail = "Item not found.")
+
+    quantity_normalised = normalise(body.quantity_raw, body.unit_raw, item.ingredient.density_g_per_ml)
+
+    item.quantity_raw = body.quantity_raw
+    item.unit_raw = body.unit_raw
+    item.quantity_normalised = quantity_normalised
+
+    db.commit()
+    db.refresh(item)
+
+    return { 
+        "id" : item.id, 
+        "name" : item.ingredient.name, 
+        "quantity_raw" : item.quantity_raw, 
+        "unit_raw" : item.unit_raw, 
+        "quantity_normalised" : item.quantity_normalised, 
+        "expiration_date" : item.expiration_date, 
+        "days_until_expiry" : (item.expiration_date - date.today()).days # Diff between current date and expiration date in integers
+    }

@@ -1,3 +1,4 @@
+from pint.facets.numpy import quantity
 from pydantic import BaseModel
 from datetime import date
 
@@ -18,3 +19,7 @@ class PantryItemOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+class PantryItemUpdate(BaseModel):
+    quantity_raw: float 
+    unit_raw: str
