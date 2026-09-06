@@ -3,12 +3,17 @@ from pint import UnitRegistry
 
 ureg = UnitRegistry()
 
-def normalise(quantity: float, unit: str, density: float) -> float:
-    if not density or not unit or unit == 'piece' or unit == 'pieces':
-        return quantity
+MASS_UNITS = {"g", "kg", "oz", "lb"}
 
-    volume = quantity * ureg(unit)
-    volume = volume.to("milliliter").magnitude
+def normalise(quantity: float, unit: str, density: float) -> float:
+    if not density or not unit or unit == "piece":
+        return quantity
+    
+    if unit in MASS_UNITS:
+        mass = (quantity * ureg(unit)).to("gram").magnitude
+        return mass
+
+    volume = (quantity * ureg(unit)).to("milliliter").magnitude
     mass = volume * density
 
     return mass

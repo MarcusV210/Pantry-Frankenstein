@@ -80,184 +80,157 @@ def build_recipe_prompt(pantry_items: list, expiring_soon: list, chaos_level: in
 prompt = build_recipe_prompt(
     pantry_items=[
   {
-    "id": 2,
+    "id": 31,
+    "name": "rice",
+    "quantity_raw": 5,
+    "unit_raw": "cups",
+    "quantity_normalised": 1005.5000051249998,
+    "expiration_date": "2026-10-06",
+    "days_until_expiry": 30
+  },
+  {
+    "id": 32,
+    "name": "whole wheat flour",
+    "quantity_raw": 3,
+    "unit_raw": "cups",
+    "quantity_normalised": 418.7611786049998,
+    "expiration_date": "2026-11-05",
+    "days_until_expiry": 60
+  },
+  {
+    "id": 33,
     "name": "kidney beans",
     "quantity_raw": 2,
     "unit_raw": "cups",
     "quantity_normalised": 392.7364725899999,
-    "expiration_date": "2026-09-15",
-    "days_until_expiry": 9
+    "expiration_date": "2026-12-05",
+    "days_until_expiry": 90
   },
   {
-    "id": 3,
+    "id": 34,
     "name": "whole milk",
+    "quantity_raw": 4,
+    "unit_raw": "cups",
+    "quantity_normalised": 974.7435343799998,
+    "expiration_date": "2026-09-09",
+    "days_until_expiry": 3
+  },
+  {
+    "id": 35,
+    "name": "ghee",
+    "quantity_raw": 4,
+    "unit_raw": "tbsp",
+    "quantity_normalised": 53.82382380374999,
+    "expiration_date": "2027-01-04",
+    "days_until_expiry": 120
+  },
+  {
+    "id": 36,
+    "name": "yogurt",
+    "quantity_raw": 2,
+    "unit_raw": "cups",
+    "quantity_normalised": 492.1035319199999,
+    "expiration_date": "2026-09-11",
+    "days_until_expiry": 5
+  },
+  {
+    "id": 37,
+    "name": "onion",
+    "quantity_raw": 4,
+    "unit_raw": "piece",
+    "quantity_normalised": 4,
+    "expiration_date": "2026-09-20",
+    "days_until_expiry": 14
+  },
+  {
+    "id": 38,
+    "name": "garlic",
+    "quantity_raw": 10,
+    "unit_raw": "piece",
+    "quantity_normalised": 10,
+    "expiration_date": "2026-09-26",
+    "days_until_expiry": 20
+  },
+  {
+    "id": 39,
+    "name": "tomato",
+    "quantity_raw": 5,
+    "unit_raw": "piece",
+    "quantity_normalised": 5,
+    "expiration_date": "2026-09-13",
+    "days_until_expiry": 7
+  },
+  {
+    "id": 40,
+    "name": "potato",
     "quantity_raw": 6,
-    "unit_raw": "cups",
-    "quantity_normalised": 1462.1153015699995,
-    "expiration_date": "2026-09-07",
-    "days_until_expiry": 1
+    "unit_raw": "piece",
+    "quantity_normalised": 6,
+    "expiration_date": "2026-10-01",
+    "days_until_expiry": 25
   },
   {
-    "id": 4,
-    "name": "rice",
-    "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
+    "id": 41,
+    "name": "ginger",
+    "quantity_raw": 50,
+    "unit_raw": "g",
+    "quantity_normalised": 50,
+    "expiration_date": "2026-09-16",
+    "days_until_expiry": 10
   },
   {
-    "id": 5,
-    "name": "rice",
-    "quantity_raw": 1,
-    "unit_raw": "cup",
-    "quantity_normalised": 201.10000102499995,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
+    "id": 42,
+    "name": "spinach",
+    "quantity_raw": 200,
+    "unit_raw": "g",
+    "quantity_normalised": 200,
+    "expiration_date": "2026-09-10",
+    "days_until_expiry": 4
   },
   {
-    "id": 7,
-    "name": "rice",
-    "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 8,
-    "name": "rice",
-    "quantity_raw": 1,
-    "unit_raw": "cup",
-    "quantity_normalised": 201.10000102499995,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 10,
-    "name": "rice",
-    "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 11,
-    "name": "rice",
-    "quantity_raw": 1,
-    "unit_raw": "cup",
-    "quantity_normalised": 201.10000102499995,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 13,
-    "name": "rice",
-    "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 14,
-    "name": "rice",
+    "id": 43,
+    "name": "turmeric powder",
     "quantity_raw": 3,
-    "unit_raw": "cups",
-    "quantity_normalised": 603.3000030749997,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
+    "unit_raw": "tbsp",
+    "quantity_normalised": 21.29294128499999,
+    "expiration_date": "2027-03-05",
+    "days_until_expiry": 180
   },
   {
-    "id": 16,
-    "name": "rice",
+    "id": 44,
+    "name": "cumin seeds",
     "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
+    "unit_raw": "tbsp",
+    "quantity_normalised": 15.673970668124996,
+    "expiration_date": "2027-03-05",
+    "days_until_expiry": 180
   },
   {
-    "id": 17,
-    "name": "rice",
-    "quantity_raw": 3,
-    "unit_raw": "cups",
-    "quantity_normalised": 603.3000030749997,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 19,
-    "name": "rice",
+    "id": 45,
+    "name": "red chili powder",
     "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
+    "unit_raw": "tbsp",
+    "quantity_normalised": 13.603823598749997,
+    "expiration_date": "2027-03-05",
+    "days_until_expiry": 180
   },
   {
-    "id": 20,
-    "name": "rice",
-    "quantity_raw": 3,
-    "unit_raw": "cups",
-    "quantity_normalised": 603.3000030749997,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
+    "id": 46,
+    "name": "eggs",
+    "quantity_raw": 6,
+    "unit_raw": "piece",
+    "quantity_normalised": 6,
+    "expiration_date": "2026-09-20",
+    "days_until_expiry": 14
   },
   {
-    "id": 22,
-    "name": "rice",
-    "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 23,
-    "name": "rice",
-    "quantity_raw": 3,
-    "unit_raw": "cups",
-    "quantity_normalised": 603.3000030749997,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 25,
-    "name": "rice",
-    "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 26,
-    "name": "rice",
-    "quantity_raw": 3,
-    "unit_raw": "cups",
-    "quantity_normalised": 603.3000030749997,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 28,
-    "name": "rice",
-    "quantity_raw": 2,
-    "unit_raw": "cups",
-    "quantity_normalised": 402.2000020499999,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
-  },
-  {
-    "id": 29,
-    "name": "rice",
-    "quantity_raw": 3,
-    "unit_raw": "cups",
-    "quantity_normalised": 603.3000030749997,
-    "expiration_date": "2026-12-01",
-    "days_until_expiry": 86
+    "id": 47,
+    "name": "chicken breast",
+    "quantity_raw": 500,
+    "unit_raw": "g",
+    "quantity_normalised": 500,
+    "expiration_date": "2026-09-08",
+    "days_until_expiry": 2
   }
 ],
     expiring_soon=[
