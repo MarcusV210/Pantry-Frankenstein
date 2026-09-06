@@ -17,7 +17,7 @@ class PantryItemOut(BaseModel):
     expiration_date: date
     days_until_expiry: int 
 
-    class Config:
+    class ConfigDict:
         from_attributes = True
 
 class PantryItemUpdate(BaseModel):

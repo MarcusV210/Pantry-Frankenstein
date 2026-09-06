@@ -9,3 +9,4 @@ google-generativeai
 pint
 python-jose[cryptography] 
 passlib[bcrypt]
+httpx2
