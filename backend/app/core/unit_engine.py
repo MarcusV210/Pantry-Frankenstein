@@ -4,7 +4,7 @@ from pint import UnitRegistry
 ureg = UnitRegistry()
 
 def normalise(quantity: float, unit: str, density: float) -> float:
-    if not density or not unit:
+    if not density or not unit or unit == 'piece' or unit == 'pieces':
         return quantity
 
     volume = quantity * ureg(unit)
