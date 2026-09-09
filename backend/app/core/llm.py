@@ -1,8 +1,10 @@
 import os 
 import json 
+import hashlib
 import google.generativeai as genai 
 from app.schemas.recipe import RecipeOutput
 from dotenv import load_dotenv, find_dotenv
+from typing import List
 
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
