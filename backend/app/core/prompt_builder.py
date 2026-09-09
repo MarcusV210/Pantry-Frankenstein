@@ -246,4 +246,4 @@ prompt = build_recipe_prompt(
 ],
     chaos_level=3,
 )
-print(prompt)
+# print(prompt)
