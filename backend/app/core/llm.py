@@ -5,6 +5,7 @@ import google.generativeai as genai
 from app.schemas.recipe import RecipeOutput
 from dotenv import load_dotenv, find_dotenv
 from typing import List
+from google.api_core import retry as api_retry
 
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -18,7 +19,10 @@ model = genai.GenerativeModel(
 )
 
 def generate_output(prompt: str) -> RecipeOutput:
-    response = model.generate_content(prompt)
+    response = model.generate_content(
+        prompt, 
+        request_options={"retry" : api_retry.Retry(maximum=0)}
+    )
 
     try: 
         data = json.loads(response.text)
