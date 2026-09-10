@@ -6,10 +6,23 @@ from app.database import SessionLocal
 from sqlalchemy import text
 import os 
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI(title="Backend something")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(auth_router, prefix="/auth")
 app.include_router(pantry_router, prefix="/pantry")
+app.include_router(recipe_router, prefix="/recipes")
 app.include_router(recipe_router, prefix="/recipe")
+
 
 @app.get("/health")
 def get_health():
