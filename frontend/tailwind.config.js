@@ -1,38 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
         franken: {
-          dark: '#0a0d14',
-          surface: '#111827',
-          card: '#162032',
-          border: '#1f293d',
-          glow: '#10b981',
-          toxic: '#22c55e',
-          neon: '#a3e635',
-          zap: '#a855f7',
-          pulse: '#8b5cf6',
-          danger: '#ef4444',
-          warning: '#f59e0b',
-        }
+          dark: '#0d1117', surface: '#131922', card: '#19212c', border: '#263241',
+          glow: '#4bbf78', toxic: '#83d6a0', neon: '#a2e5b8', zap: '#a78bfa', pulse: '#8b7cf6',
+          danger: '#f87171', warning: '#fbbf24',
+        },
       },
       boxShadow: {
-        'glow-emerald': '0 0 20px -5px rgba(16, 185, 129, 0.4)',
-        'glow-purple': '0 0 20px -5px rgba(168, 85, 247, 0.4)',
-        'glow-danger': '0 0 20px -5px rgba(239, 68, 68, 0.4)',
+        'glow-emerald': '0 10px 30px -16px rgba(131, 214, 160, .65)',
+        'glow-purple': '0 10px 30px -16px rgba(167, 139, 250, .55)',
+        'glow-danger': '0 10px 30px -16px rgba(248, 113, 113, .45)',
       },
-      fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-      }
+      fontFamily: { sans: ['DM Sans', 'system-ui', 'sans-serif'] },
     },
   },
   plugins: [],
-}
-
-
+};

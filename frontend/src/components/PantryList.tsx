@@ -31,9 +31,9 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
 
 const FILTER_OPTIONS: { value: FilterKey; label: string; color: string }[] = [
   { value: 'all', label: 'All', color: 'text-slate-300 border-slate-700 hover:border-slate-500' },
-  { value: 'expiring', label: '🕐 Expiring (≤3d)', color: 'text-amber-400 border-amber-500/30 hover:border-amber-500/60' },
-  { value: 'expired', label: '⚠️ Expired', color: 'text-rose-400 border-rose-500/30 hover:border-rose-500/60' },
-  { value: 'fresh', label: '✅ Fresh (>7d)', color: 'text-emerald-400 border-emerald-500/30 hover:border-emerald-500/60' },
+  { value: 'expiring', label: 'Expiring (≤3d)', color: 'text-amber-400 border-amber-500/30 hover:border-amber-500/60' },
+  { value: 'expired', label: 'Expired', color: 'text-rose-400 border-rose-500/30 hover:border-rose-500/60' },
+  { value: 'fresh', label: 'Fresh (>7d)', color: 'text-emerald-400 border-emerald-500/30 hover:border-emerald-500/60' },
 ];
 
 const UNITS = ['g', 'kg', 'ml', 'l', 'cup', 'tbsp', 'tsp', 'piece'];
@@ -48,6 +48,7 @@ export const PantryList: React.FC = () => {
   const [sortKey, setSortKey] = useState<SortKey>('expiry_asc');
   const [filterKey, setFilterKey] = useState<FilterKey>('all');
   const [showControls, setShowControls] = useState(false);
+  const [isClearingAll, setIsClearingAll] = useState(false);
 
   const { data: items, isLoading, error } = useQuery<PantryItem[]>({
     queryKey: ['pantry-items'],
@@ -131,6 +132,26 @@ export const PantryList: React.FC = () => {
     updateMutation.mutate({ id, qty: editQty, unit: editUnit });
   };
 
+  const handleClearAll = async () => {
+    if (!items?.length || isClearingAll) return;
+    const confirmed = window.confirm(`Delete all ${items.length} pantry items? This cannot be undone.`);
+    if (!confirmed) return;
+
+    setIsClearingAll(true);
+    setDeleteError(null);
+    try {
+      await Promise.all(items.map((item) => deletePantryItem(item.id)));
+      queryClient.setQueryData<PantryItem[]>(['pantry-items'], []);
+      queryClient.invalidateQueries({ queryKey: ['pantry-items'] });
+      queryClient.invalidateQueries({ queryKey: ['expiring-items'] });
+    } catch (err: any) {
+      setDeleteError(err.response?.data?.detail || 'Some pantry items could not be deleted.');
+      queryClient.invalidateQueries({ queryKey: ['pantry-items'] });
+    } finally {
+      setIsClearingAll(false);
+    }
+  };
+
   const getExpiryBadge = (days: number) => {
     if (days < 0) {
       return (
@@ -202,6 +223,16 @@ export const PantryList: React.FC = () => {
                 <Sparkles className="w-3.5 h-3.5 text-purple-400" />
                 <span>Cook with these</span>
               </Link>
+            )}
+            {items && items.length > 0 && (
+              <button
+                onClick={handleClearAll}
+                disabled={isClearingAll}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-rose-500/30 px-3.5 py-1.5 text-xs font-semibold text-rose-300 transition-colors hover:border-rose-400/60 hover:bg-rose-500/10 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+                <span>{isClearingAll ? 'Clearing...' : 'Clear all'}</span>
+              </button>
             )}
             <button
               onClick={() => setShowControls((v) => !v)}
@@ -294,7 +325,7 @@ export const PantryList: React.FC = () => {
           </div>
           <h4 className="text-sm font-semibold text-slate-300 mb-1">Your pantry is empty</h4>
           <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4">
-            Add ingredients above so the Frankenstein generator can construct monster recipes.
+            Add a few ingredients above to start building your inventory.
           </p>
         </div>
       ) : displayedItems.length === 0 ? (

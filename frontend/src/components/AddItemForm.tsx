@@ -163,8 +163,8 @@ export const AddItemForm: React.FC = () => {
   };
 
   const categoryMeta: Record<string, string> = {
-    All: '🗂️', 'Grains & Flour': '🌾', Legumes: '🫘', Vegetables: '🥦',
-    Protein: '🥩', Dairy: '🥛', 'Fats & Oils': '🫙', Spices: '🌶️',
+    All: 'All', 'Grains & Flour': 'Grains', Legumes: 'Legumes', Vegetables: 'Vegetables',
+    Protein: 'Protein', Dairy: 'Dairy', 'Fats & Oils': 'Fats', Spices: 'Spices',
   };
 
   return (
@@ -364,7 +364,7 @@ export const AddItemForm: React.FC = () => {
           <button
             type="submit"
             disabled={addMutation.isPending}
-            className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-400 hover:to-lime-400 text-franken-dark font-bold text-sm flex items-center justify-center gap-2 shadow-glow-emerald hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:scale-[1.02] active:scale-100"
+            className="primary-action flex w-full items-center justify-center gap-2 rounded-lg px-6 py-2.5 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
           >
             {addMutation.isPending ? (
               <>

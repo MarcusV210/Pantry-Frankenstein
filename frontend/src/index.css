@@ -1,118 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: dark;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --canvas: #0d1117;
+  --surface: #131922;
+  --surface-raised: #19212c;
+  --line: #263241;
+  --line-soft: rgba(148, 163, 184, 0.14);
+  --accent: #83d6a0;
+}
+
 @layer base {
-  :root {
-    color-scheme: dark;
-  }
-
+  * { box-sizing: border-box; }
   body {
-    @apply bg-franken-dark text-slate-100 min-h-screen font-sans selection:bg-franken-toxic selection:text-black;
+    @apply min-h-screen bg-franken-dark text-slate-100;
+    margin: 0;
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.018), transparent 300px);
+  }
+  button, input, select { font: inherit; }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 }
 
-/* Custom glowing and animated utilities */
-.glow-text-emerald {
-  text-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+@layer components {
+  .app-shell { min-height: 100vh; background: var(--canvas); }
+  .content-rail { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+  .page-heading { border-bottom: 1px solid var(--line-soft); padding-bottom: 24px; }
+  .eyebrow { color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .display-title { font-family: 'Manrope', system-ui, sans-serif; letter-spacing: -.045em; }
+  .quiet-card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
+  .quiet-card-raised { background: var(--surface-raised); border: 1px solid var(--line); border-radius: 18px; }
+  .primary-action { background: var(--accent); color: #0d1710; transition: background .2s ease, transform .2s ease; }
+  .primary-action:hover { background: #a2e5b8; transform: translateY(-1px); }
 }
 
-.glow-text-purple {
-  text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
-}
+.glass-panel { background: var(--surface); border: 1px solid var(--line); box-shadow: 0 18px 45px rgba(0, 0, 0, .16); backdrop-filter: none; }
+.glass-panel-hover { transition: border-color .2s ease, background .2s ease, transform .2s ease; }
+.glass-panel-hover:hover { border-color: rgba(131, 214, 160, .45); box-shadow: 0 18px 45px rgba(0, 0, 0, .22); transform: translateY(-1px); }
+input::placeholder { color: #64748b; }
+select option, select optgroup { background: #131922; color: #f1f5f9; }
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.7); cursor: pointer; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--canvas); }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-.glass-panel {
-  background: rgba(17, 24, 39, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(31, 41, 61, 0.8);
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(.98); } to { opacity: 1; transform: scale(1); } }
+.animate-fade-in { animation: fadeIn .35s ease-out both; }
+.animate-slide-up { animation: slideUp .35s ease-out both; }
+.animate-slide-down { animation: slideDown .25s ease-out both; }
+.animate-scale-in { animation: scaleIn .25s ease-out both; }
+.animate-glow-pulse, .glow-text-emerald, .glow-text-purple { animation: none; text-shadow: none; }
 
-.glass-panel-hover {
-  transition: all 0.2s ease-in-out;
-}
-.glass-panel-hover:hover {
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 8px 30px -8px rgba(16, 185, 129, 0.15);
-}
-
-/* Custom sleek scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #0a0d14;
-}
-::-webkit-scrollbar-thumb {
-  background: #1f293d;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #374151;
-}
-
-/* ── Keyframe Animations ── */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 12px -3px rgba(163, 230, 53, 0.3); }
-  50%       { box-shadow: 0 0 24px -3px rgba(163, 230, 53, 0.6); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.4s ease-out forwards;
-}
-
-.animate-slide-down {
-  animation: slideDown 0.3s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.3s ease-out forwards;
-}
-
-.animate-glow-pulse {
-  animation: glowPulse 2.5s ease-in-out infinite;
-}
-
-/* Staggered children animations */
-.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
-.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
-.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
-.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
-.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
-.stagger-children > *:nth-child(7) { animation-delay: 360ms; }
-.stagger-children > *:nth-child(8) { animation-delay: 420ms; }
-.stagger-children > *:nth-child(9) { animation-delay: 480ms; }
-
-/* Input focus ring override for dark theme */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.6);
-  cursor: pointer;
-}
+@media (max-width: 640px) { .content-rail { width: min(100% - 28px, 1180px); } }

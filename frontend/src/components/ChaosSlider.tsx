@@ -49,8 +49,8 @@ const CHAOS_LEVELS = [
   },
   {
     level: 5,
-    title: 'Frankenstein Chaos',
-    subtitle: 'Maximum monster voltage! Unhinged ingredient fusion created for the brave.',
+    title: 'Wildly experimental',
+    subtitle: 'Maximum creativity. Unexpected combinations for when you want to try something new.',
     icon: Skull,
     color: 'text-rose-400',
     border: 'border-rose-500/30',
@@ -64,7 +64,7 @@ export const ChaosSlider: React.FC<ChaosSliderProps> = ({ value, onChange }) => 
   const Icon = current.icon;
 
   return (
-    <div className="glass-panel p-6 rounded-2xl border border-franken-border shadow-lg">
+    <div className="glass-panel rounded-2xl p-6">
       <div className="flex items-center justify-between mb-4">
         <div>
           <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
@@ -92,7 +92,7 @@ export const ChaosSlider: React.FC<ChaosSliderProps> = ({ value, onChange }) => 
           step="1"
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className={`w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer ${current.accent}`}
+          className="h-2.5 w-full cursor-pointer appearance-none rounded-lg bg-slate-700 accent-franken-neon"
         />
 
         {/* Step ticks */}

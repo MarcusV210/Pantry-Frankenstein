@@ -4,7 +4,6 @@ import { getRecipeHistory } from '../api/recipes';
 import type { RecipeHistoryItem } from '../types';
 import { RecipeCard } from '../components/RecipeCard';
 import {
-  History,
   Loader2,
   AlertCircle,
   Sparkles,
@@ -62,29 +61,20 @@ export const HistoryPage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
-      {/* Header */}
-      <div className="pb-4 border-b border-franken-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30">
-            <History className="w-6 h-6" />
-          </div>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Recipe Vault & Archive
-            </h1>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Browse previously synthesized culinary creations from your lab
-            </p>
-          </div>
+    <div className="mx-auto max-w-5xl space-y-6">
+      <div className="page-heading flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="eyebrow mb-3">Recipe history</p>
+          <h1 className="display-title text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Meals you’ve made possible.</h1>
+          <p className="mt-2 text-sm text-slate-400">Return to recipes you generated from your pantry.</p>
         </div>
 
         <Link
           to="/generate"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-400 hover:to-lime-400 text-franken-dark font-bold text-xs shadow-glow-emerald transition-all hover:scale-105 shrink-0"
+          className="primary-action inline-flex shrink-0 items-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold"
         >
           <Sparkles className="w-4 h-4" />
-          <span>New Synthesis</span>
+          <span>Generate a recipe</span>
         </Link>
       </div>
 
@@ -96,14 +86,14 @@ export const HistoryPage: React.FC = () => {
           <div>
             <h3 className="text-base font-bold text-white mb-1">Vault is Empty</h3>
             <p className="text-xs text-slate-400 max-w-sm mx-auto">
-              You haven't generated any AI recipes yet. Visit the Synthesizer Lab to create your first Frankenstein masterpiece!
+              You have not generated any recipes yet. Start with the ingredients already in your pantry.
             </p>
           </div>
           <Link
             to="/generate"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition-all"
           >
-            <span>Open Synthesizer Lab</span>
+            <span>Generate a recipe</span>
           </Link>
         </div>
       ) : (
@@ -113,7 +103,7 @@ export const HistoryPage: React.FC = () => {
             return (
               <div
                 key={recipe.id}
-                className="glass-panel rounded-2xl border border-franken-border overflow-hidden transition-all"
+                className="glass-panel overflow-hidden rounded-2xl transition-all hover:border-slate-500"
               >
                 {/* Accordion Summary Header */}
                 <div

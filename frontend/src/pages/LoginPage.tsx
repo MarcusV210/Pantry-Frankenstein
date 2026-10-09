@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginApi } from '../api/auth';
 import { useAuthStore } from '../store/authStore';
-import { Beaker, Lock, Mail, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
+import { Lock, Mail, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -32,22 +32,17 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-franken-dark flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Ambient background glow circles */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
+    <div className="app-shell flex min-h-screen items-center justify-center p-4">
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo & Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex p-3 rounded-2xl bg-gradient-to-tr from-emerald-500 to-lime-400 shadow-glow-emerald mb-4">
-            <Beaker className="w-8 h-8 text-franken-dark" />
-          </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white mb-2">
-            Pantry<span className="text-franken-neon">Frankenstein</span>
+          <div className="mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-franken-neon text-sm font-black text-franken-dark">PF</div>
+          <h1 className="display-title mb-2 text-3xl font-extrabold tracking-tight text-white">
+            Welcome back
           </h1>
           <p className="text-sm text-slate-400">
-            Sign in to revive your expiring ingredients into culinary beasts.
+            Sign in to keep your pantry moving.
           </p>
         </div>
 
@@ -98,16 +93,16 @@ export const LoginPage: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-400 hover:to-lime-400 text-franken-dark font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-glow-emerald hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="primary-action flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Entering the Laboratory...</span>
+                  <span>Signing in...</span>
                 </>
               ) : (
                 <>
-                  <span>Sign In</span>
+                  <span>Sign in</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

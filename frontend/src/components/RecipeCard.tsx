@@ -44,7 +44,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onCookedSuccess 
   return (
     <div className="glass-panel rounded-2xl border border-franken-border shadow-2xl overflow-hidden animate-fade-in">
       {/* Recipe Header Banner */}
-      <div className="bg-gradient-to-r from-emerald-950/40 via-purple-950/40 to-slate-900 p-6 border-b border-franken-border">
+      <div className="border-b border-franken-border bg-franken-card p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
@@ -182,7 +182,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onCookedSuccess 
             className={`w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md cursor-pointer ${
               isCooked
                 ? 'bg-slate-800 text-emerald-400 border border-emerald-500/40 cursor-default'
-                : 'bg-gradient-to-r from-emerald-500 to-lime-500 hover:from-emerald-400 hover:to-lime-400 text-franken-dark shadow-glow-emerald hover:shadow-lg'
+                : 'bg-franken-neon text-franken-dark hover:bg-white'
             }`}
           >
             {cookedMutation.isPending ? (
@@ -198,7 +198,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onCookedSuccess 
             ) : (
               <>
                 <ChefHat className="w-4 h-4" />
-                <span>Mark as Cooked 🍳</span>
+                <span>Mark as cooked</span>
               </>
             )}
           </button>

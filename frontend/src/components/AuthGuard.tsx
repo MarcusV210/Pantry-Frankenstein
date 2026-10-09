@@ -12,9 +12,9 @@ export const AuthGuard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-franken-dark flex flex-col">
+    <div className="app-shell flex min-h-screen flex-col">
       <Navbar />
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="content-rail flex-1 py-8 sm:py-10">
         <Outlet />
       </main>
     </div>

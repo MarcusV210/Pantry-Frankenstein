@@ -57,13 +57,13 @@ export const PantryStatsBar: React.FC = () => {
   if (totalItems === 0) return null;
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 animate-slide-up">
+    <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-franken-border bg-franken-border sm:grid-cols-4 animate-slide-up">
       {stats.map(({ label, value, icon: Icon, color, bg, border }) => (
         <div
           key={label}
-          className={`flex items-center gap-3 px-4 py-3 rounded-xl ${bg} border ${border} transition-all`}
+          className="flex items-center gap-3 bg-franken-surface px-4 py-4 transition-colors hover:bg-franken-card"
         >
-          <div className={`p-2 rounded-lg ${bg} ${border} border`}>
+          <div className={`rounded-lg border p-2 ${bg} ${border}`}>
             <Icon className={`w-4 h-4 ${color}`} />
           </div>
           <div>

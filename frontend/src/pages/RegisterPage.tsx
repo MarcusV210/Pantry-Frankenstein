@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerApi } from '../api/auth';
 import { useAuthStore } from '../store/authStore';
-import { Beaker, Lock, Mail, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
+import { Lock, Mail, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 
 export const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -44,22 +44,17 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-franken-dark flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Ambient background glow */}
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none" />
+    <div className="app-shell flex min-h-screen items-center justify-center p-4">
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo & Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex p-3 rounded-2xl bg-gradient-to-tr from-purple-500 to-emerald-400 shadow-glow-purple mb-4">
-            <Beaker className="w-8 h-8 text-franken-dark" />
-          </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white mb-2">
-            Join the <span className="text-franken-neon">Laboratory</span>
+          <div className="mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-franken-neon text-sm font-black text-franken-dark">PF</div>
+          <h1 className="display-title mb-2 text-3xl font-extrabold tracking-tight text-white">
+            Set up your pantry
           </h1>
           <p className="text-sm text-slate-400">
-            Create an account to begin tracking ingredients and synthesising recipes.
+            Create an account to start tracking ingredients and recipes.
           </p>
         </div>
 
@@ -127,16 +122,16 @@ export const RegisterPage: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-emerald-500 hover:from-purple-400 hover:to-emerald-400 text-franken-dark font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-glow-purple hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="primary-action mt-2 flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-bold transition disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Synthesizing Credentials...</span>
+                  <span>Creating account...</span>
                 </>
               ) : (
                 <>
-                  <span>Create Account</span>
+                  <span>Create account</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}

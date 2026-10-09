@@ -12,7 +12,6 @@ import {
   Clock,
   Layers,
   Zap,
-  Beaker,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -50,22 +49,11 @@ export const GeneratePage: React.FC = () => {
   const hasPantryItems = pantryItems && pantryItems.length > 0;
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto">
-      {/* Header */}
-      <div className="pb-4 border-b border-franken-border">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-gradient-to-tr from-purple-500 to-emerald-400 text-franken-dark shadow-glow-purple">
-            <Beaker className="w-6 h-6" />
-          </div>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Recipe Synthesizer Lab
-            </h1>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Transform ingredients on the brink of expiry into monstrously delicious feasts with generative AI
-            </p>
-          </div>
-        </div>
+    <div className="mx-auto max-w-5xl space-y-8">
+      <div className="page-heading">
+        <p className="eyebrow mb-3">Recipe generator</p>
+        <h1 className="display-title text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Make something from what you have.</h1>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">Choose how adventurous to be and let your pantry guide the next meal.</p>
       </div>
 
       {!hasPantryItems && (
@@ -93,7 +81,7 @@ export const GeneratePage: React.FC = () => {
         </div>
 
         {/* Days Expiring & Quick Summary */}
-        <div className="glass-panel p-6 rounded-2xl border border-franken-border flex flex-col justify-between space-y-6">
+          <div className="glass-panel flex flex-col justify-between space-y-6 rounded-2xl p-6">
           <div>
             <div className="flex items-center gap-2 mb-2 text-slate-300">
               <Clock className="w-4 h-4 text-emerald-400" />
@@ -132,7 +120,7 @@ export const GeneratePage: React.FC = () => {
           <button
             onClick={handleGenerate}
             disabled={generateMutation.isPending || !hasPantryItems}
-            className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 via-lime-500 to-purple-500 hover:from-emerald-400 hover:to-purple-400 text-franken-dark font-extrabold text-sm tracking-wider uppercase flex items-center justify-center gap-2.5 shadow-glow-emerald hover:shadow-glow-purple hover:scale-[1.02] transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            className="primary-action flex w-full items-center justify-center gap-2.5 rounded-lg px-4 py-3.5 text-sm font-extrabold transition disabled:cursor-not-allowed disabled:opacity-40"
           >
             {generateMutation.isPending ? (
               <>
@@ -142,7 +130,7 @@ export const GeneratePage: React.FC = () => {
             ) : (
               <>
                 <Zap className="w-5 h-5 text-franken-dark fill-franken-dark" />
-                <span>Synthesize Recipe ⚡</span>
+                <span>Generate recipe</span>
               </>
             )}
           </button>
@@ -161,20 +149,19 @@ export const GeneratePage: React.FC = () => {
 
       {/* Loading Animation during LLM Generation */}
       {generateMutation.isPending && (
-        <div className="glass-panel p-12 rounded-2xl border border-purple-500/40 text-center flex flex-col items-center justify-center space-y-4 shadow-glow-purple">
+        <div className="glass-panel flex flex-col items-center justify-center space-y-4 rounded-2xl border border-purple-500/30 p-12 text-center">
           <div className="relative">
             <div className="w-16 h-16 rounded-2xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center animate-pulse">
               <Sparkles className="w-8 h-8 text-purple-400 animate-spin" />
             </div>
-            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-emerald-500 to-purple-500 blur-sm opacity-50 -z-10" />
           </div>
 
           <div>
             <h3 className="text-lg font-bold text-white">
-              Frankenstein AI is Synthesizing Your Meal...
+              Building your recipe...
             </h3>
             <p className="text-xs text-slate-400 max-w-md mt-1">
-              Analyzing ingredient densities, balancing expiration priorities, and channeling Chaos Level {chaosLevel} culinary physics.
+              Prioritizing ingredients expiring within {daysExpiring} days and matching them to your creativity setting.
             </p>
           </div>
         </div>
@@ -185,7 +172,7 @@ export const GeneratePage: React.FC = () => {
         <div className="space-y-3">
           <div className="flex items-center gap-2 text-xs uppercase font-bold tracking-widest text-franken-neon">
             <Sparkles className="w-4 h-4" />
-            <span>Alchemical Formulation Ready</span>
+            <span>Recipe ready</span>
           </div>
           <RecipeCard recipe={currentRecipe} />
         </div>
